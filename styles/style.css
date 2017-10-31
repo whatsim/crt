@@ -1,0 +1,17 @@
+html, body {
+	overflow: hidden;
+	margin:0;
+	background:#111;
+}
+canvas {
+	width:100vw;
+	height:100vh;
+	cursor: none;
+	/*image-rendering: pixelated;*/
+	position: relative;
+	z-index: 1000;
+}
+input {
+	position: absolute;
+	top: 0;
+}
