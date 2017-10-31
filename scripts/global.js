@@ -15,7 +15,10 @@ var context = input.getContext('2d'),
 	reformat = seriously.transform('reformat'),
 	target = seriously.target('#out'),
 	adder = 0,
-	poweredUp = false;
+	poweredUp = false,
+	wSoft = new Image();
+
+	wSoft.src = "wsoft.png"
 
 target.width = window.innerWidth * zoom
 target.height = window.innerHeight * zoom
@@ -83,7 +86,7 @@ function tick(now){
 	context.fillStyle = "#111"
 	context.fillRect(100,150,window.innerWidth-200,window.innerHeight-300)
 	context.strokeRect(100,150,window.innerWidth-200,window.innerHeight-300)
-	context.fillStyle = "#f00"
+	context.fillStyle = "#fff"
 	context.font = 'bold 24px Menlo'
 	context.fillText("FAULT::INTERRUPT.CURRENT_EXCEEDS_TOLERANCE",135,200)
 	context.font = '24px Menlo'
@@ -96,8 +99,10 @@ function tick(now){
 	context.closePath()
 	context.fillStyle = "#fff"
 	context.fill()
-
+	context.drawImage(wSoft,100,52,128,66)
 	if(!poweredUp){
+		context.save()
+		context.scale(2,2)
 		context.fillStyle = "#0f0"
 		// 0
 		context.fillRect(48,48,8,64)
@@ -109,6 +114,7 @@ function tick(now){
 		context.fillRect(106,48,42,8)
 		context.fillRect(112,76,36,8)
 		context.fillRect(106,104,42,8)
+		context.restore()
 	}
 
 	context.restore()
