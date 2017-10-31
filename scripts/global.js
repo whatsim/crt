@@ -99,8 +99,16 @@ function tick(now){
 
 	if(!poweredUp){
 		context.fillStyle = "#0f0"
-		context.font = '64px Courier New'
-		context.fillText("CH03",48,108)
+		// 0
+		context.fillRect(48,48,8,64)
+		context.fillRect(48,48,42,8)
+		context.fillRect(82,48,8,64)
+		context.fillRect(48,104,42,8)
+		// 3
+		context.fillRect(140,48,8,64)
+		context.fillRect(106,48,42,8)
+		context.fillRect(112,76,36,8)
+		context.fillRect(106,104,42,8)
 	}
 
 	context.restore()
