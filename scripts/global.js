@@ -11,6 +11,7 @@ var context = input.getContext('2d'),
 	source = seriously.source(input),
 	glitch = seriously.effect('tvglitch'),
 	blur = seriously.effect('blur'),
+	pincushion = seriously.effect('pincushion'),
 	reformat = seriously.transform('reformat'),
 	target = seriously.target('#out'),
 	adder = 0,
@@ -23,7 +24,8 @@ reformat.mode = "contain"
 reformat.source = source;
 glitch.source = reformat;
 blur.source = glitch
-target.source = blur;
+pincushion.source = blur;
+target.source = pincushion;
 
 glitch.scanlines = 0.1
 glitch.bars = 0.05
