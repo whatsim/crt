@@ -5,8 +5,8 @@ input.width = window.innerWidth * zoom
 input.height = window.innerHeight * zoom
 var context = input.getContext('2d'),
 	mousePos = {
-		x : 0,
-		y : 0
+		x : 10,
+		y : 10
 	},
 	source = seriously.source(input),
 	glitch = seriously.effect('tvglitch'),
@@ -16,9 +16,11 @@ var context = input.getContext('2d'),
 	target = seriously.target('#out'),
 	adder = 0,
 	poweredUp = false,
-	wSoft = new Image();
+	arpa = new Image();
 
-	wSoft.src = "wsoft.png"
+	arpa.src = "arpa.png"
+
+var lines = []
 
 target.width = window.innerWidth * zoom
 target.height = window.innerHeight * zoom
@@ -52,6 +54,7 @@ function mouseMove(e){
 window.addEventListener('keydown',keyDown)
 function keyDown(e){
 	if(e.key === 'Enter'){
+		lines.push(inputField.value)
 		inputField.value = ""
 	}
 }
@@ -60,7 +63,7 @@ setTimeout(fuzz,3000)
 
 function fuzz(){
 	poweredUp = true
-	if(Math.random() > 0.8){
+	if(Math.random() > 0.9){
 		glitch.verticalSync = Math.random()
 		glitch.bars = 0.3
 		adder = 0.02
@@ -74,24 +77,26 @@ function fuzz(){
 
 function tick(now){
 	inputField.focus()
-	
+	input.width = input.width
 	context.lineWidth = 3
-	context.fillStyle = "#111"
+	context.fillStyle = "#000"
 	context.fillRect(0,0,input.width,input.height)
 	context.save()
 	context.scale(zoom,zoom)
 	context.strokeStyle = '#777'
-	context.fillStyle = "#333"
-	context.fillRect(16,16,window.innerWidth-32,window.innerHeight-32)
-	context.fillStyle = "#111"
-	context.fillRect(100,150,window.innerWidth-200,window.innerHeight-300)
-	context.strokeRect(100,150,window.innerWidth-200,window.innerHeight-300)
+	context.strokeRect(250,50,window.innerWidth-300,window.innerHeight-150)
 	context.fillStyle = "#fff"
 	context.font = 'bold 24px Menlo'
-	context.fillText("FAULT::INTERRUPT.CURRENT_EXCEEDS_TOLERANCE",135,200)
+	context.fillText("FAULT::KILL_SIGNAL_IGNORED",275,95)
+	context.fillText("C2.MANISTEE.MI.US.ARPA//ORACLE/ROOT",250,window.innerHeight-50)
 	context.font = '24px Menlo'
 	context.fillStyle = "#fff"
-	context.fillText("> " + inputField.value,135,250)
+	var y = 143;
+	for(var i = 0; i < lines.length; i ++){
+		context.fillText(": " + lines[i],275,y)
+		y = i * 36 + 179
+	}
+	context.fillText("> " + inputField.value,275,y)
 	context.beginPath()
 	context.moveTo(mousePos.x,mousePos.y+18)
 	context.lineTo(mousePos.x,mousePos.y)
@@ -99,11 +104,11 @@ function tick(now){
 	context.closePath()
 	context.fillStyle = "#fff"
 	context.fill()
-	context.drawImage(wSoft,100,52,128,66)
+	context.drawImage(arpa,50,71,150,75)
 	if(!poweredUp){
 		context.save()
 		context.scale(2,2)
-		context.fillStyle = "#0f0"
+		context.fillStyle = "#fff"
 		// 0
 		context.fillRect(48,48,8,64)
 		context.fillRect(48,48,42,8)
