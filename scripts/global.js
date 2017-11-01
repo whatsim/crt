@@ -80,7 +80,7 @@ function fuzz(){
 
 function tick(now){
 	glitch.verticalSync *= 0.9
-	if(glitch.verticalSync < 0.000000001){
+	if(glitch.verticalSync < 0.000002){
 		glitch.bars = 0.05
 		adder = 0
 	}
