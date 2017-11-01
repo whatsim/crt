@@ -89,7 +89,10 @@ function tick(now){
 	context.font = 'bold 24px Menlo'
 	context.fillText("FAULT::KILL_SIGNAL_IGNORED",275,95)
 	context.fillText("C2.MANISTEE.MI.US.ARPA//ORACLE/ROOT",250,window.innerHeight-50)
+	context.textAlign = "end"
 	context.font = '24px Menlo'
+	context.fillText("v1978.7c",window.innerWidth-50,window.innerHeight-50)
+	context.textAlign = "start"
 	context.fillStyle = "#fff"
 	var y = 143;
 	for(var i = 0; i < lines.length; i ++){
