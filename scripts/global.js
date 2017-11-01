@@ -15,7 +15,7 @@ var context = input.getContext('2d'),
 	reformat = seriously.transform('reformat'),
 	target = seriously.target('#out'),
 	adder = 0,
-	poweredUp = false,
+	poweredUp = 3,
 	arpa = new Image();
 
 	arpa.src = "arpa.png"
@@ -33,11 +33,14 @@ pincushion.source = blur;
 target.source = pincushion;
 
 glitch.scanlines = 0.1
-glitch.bars = 0.05
 glitch.barsRate = 0.01
 glitch.distortion = 0.003
 glitch.lineSync = 0.007
-glitch.verticalSync = 0
+
+
+glitch.verticalSync = Math.random()
+glitch.bars = 0.3
+adder = 0.02
 
 blur.amount = 0.005
 
@@ -62,8 +65,8 @@ function keyDown(e){
 setTimeout(fuzz,3000)
 
 function fuzz(){
-	poweredUp = true
-	if(Math.random() > 0.9){
+	poweredUp--
+	if(Math.random() > 0.8){
 		glitch.verticalSync = Math.random()
 		glitch.bars = 0.3
 		adder = 0.02
@@ -76,6 +79,11 @@ function fuzz(){
 }
 
 function tick(now){
+	glitch.verticalSync *= 0.9
+	if(glitch.verticalSync < 0.000000001){
+		glitch.bars = 0.05
+		adder = 0
+	}
 	inputField.focus()
 	input.width = input.width
 	context.lineWidth = 3
@@ -108,7 +116,7 @@ function tick(now){
 	context.fillStyle = "#fff"
 	context.fill()
 	context.drawImage(arpa,50,71,150,75)
-	if(!poweredUp){
+	if(poweredUp > 0){
 		context.save()
 		context.scale(2,2)
 		context.fillStyle = "#fff"
