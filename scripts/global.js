@@ -128,7 +128,7 @@ function tick(now){
 		context.fillText(": " + lines[i],275,y)
 		y = i * 36 + 179
 	}
-	context.fillStyle = "#333"
+	context.fillStyle = "#33333a"
 	context.fillRect(250,y-30,window.innerWidth-300,40)
 	context.fillStyle = "#fff"
 	context.fillText("> " + inputField.value,275,y)
