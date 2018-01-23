@@ -3,6 +3,7 @@ var seriously = new Seriously(),
 	zoom = 0.5
 input.width = window.innerWidth * zoom
 input.height = window.innerHeight * zoom
+
 var context = input.getContext('2d'),
 	mousePos = {
 		x : 10,
@@ -61,6 +62,7 @@ function keyDown(e){
 	if(e.key === 'Enter'){
 		lines.push(inputField.value)
 		inputField.value = ""
+		beep.play()
 	}
 }
 
