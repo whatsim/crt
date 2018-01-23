@@ -29,10 +29,11 @@ target.height = window.innerHeight * zoom
 reformat.mode = "contain"
 
 reformat.source = source;
-drift.source = reformat
-pincushion.source = drift;
+
+pincushion.source = reformat;
 glitch.source = pincushion;
-blur.source = glitch
+drift.source = glitch
+blur.source = drift
 target.source = blur;
 
 glitch.scanlines = 0.1
