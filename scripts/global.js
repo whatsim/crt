@@ -12,6 +12,7 @@ var context = input.getContext('2d'),
 	glitch = seriously.effect('tvglitch'),
 	blur = seriously.effect('blur'),
 	pincushion = seriously.effect('pincushion'),
+	drift = seriously.effect('drift'),
 	reformat = seriously.transform('reformat'),
 	target = seriously.target('#out'),
 	adder = 0,
@@ -27,10 +28,11 @@ target.height = window.innerHeight * zoom
 reformat.mode = "contain"
 
 reformat.source = source;
-glitch.source = reformat;
+drift.source = reformat
+pincushion.source = drift;
+glitch.source = pincushion;
 blur.source = glitch
-pincushion.source = blur;
-target.source = pincushion;
+target.source = blur;
 
 glitch.scanlines = 0.1
 glitch.barsRate = 0.01
@@ -66,7 +68,7 @@ setTimeout(fuzz,3000)
 
 function fuzz(){
 	poweredUp--
-	if(Math.random() > 0.8){
+	if(Math.random() > 0.9){
 		glitch.verticalSync = Math.random()
 		glitch.bars = 0.3
 		adder = 0.02
@@ -79,6 +81,11 @@ function fuzz(){
 }
 
 function tick(now){
+	if(drift.drift < 0.1){
+		drift.drift = Math.random() * Math.random() * 0.9
+	} else {
+		drift.drift *= 0.6
+	}
 	glitch.verticalSync *= 0.9
 	if(glitch.verticalSync < 0.000002){
 		glitch.bars = 0.05
@@ -86,9 +93,23 @@ function tick(now){
 	}
 	inputField.focus()
 	input.width = input.width
+
 	context.lineWidth = 3
 	context.fillStyle = "#000"
 	context.fillRect(0,0,input.width,input.height)
+
+	context.fillStyle = "#1a1a2a"
+	for(var i = 1; i < 100; i++){
+		let high = window.innerWidth
+		let low = 0
+		let step = (high - low) / 100
+		
+		
+		
+			context.fillRect(step*i,0,1,window.innerHeight);
+		
+	}
+
 	context.save()
 	context.scale(zoom,zoom)
 	context.strokeStyle = '#777'
@@ -107,6 +128,9 @@ function tick(now){
 		context.fillText(": " + lines[i],275,y)
 		y = i * 36 + 179
 	}
+	context.fillStyle = "#333"
+	context.fillRect(250,y-30,window.innerWidth-300,40)
+	context.fillStyle = "#fff"
 	context.fillText("> " + inputField.value,275,y)
 	context.beginPath()
 	context.moveTo(mousePos.x,mousePos.y+18)
@@ -115,6 +139,7 @@ function tick(now){
 	context.closePath()
 	context.fillStyle = "#fff"
 	context.fill()
+	
 	context.drawImage(arpa,50,71,150,75)
 	if(poweredUp > 0){
 		context.save()
