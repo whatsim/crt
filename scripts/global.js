@@ -104,9 +104,7 @@ function tick(now){
 		let low = 0
 		let step = (high - low) / 100
 		
-		
-		
-			context.fillRect(step*i,0,1,window.innerHeight);
+		context.fillRect(step*i,0,1,window.innerHeight);
 		
 	}
 
